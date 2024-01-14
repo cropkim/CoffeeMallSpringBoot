@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+<head>
+  <meta name="_csrf" th:content="${_csrf.token}"/>
+  <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+
+<th:block layout:fragment="script">
+  <script th:inline="javascript">
+    $(document).ready(function () {
+      var errorMessage = /*[[${errorMessage}]]*/ null;
+      if (errorMessage != null) {
+        alert(errorMessage);
+      }
+    });
+    function updateSliderValue(sliderId, valueId) {
+      const slider = document.getElementById(sliderId);
+      const value = document.getElementById(valueId);
+      value.textContent = slider.value;
+    }
+
+    function resetSliderValues() {
+      const sliders = document.querySelectorAll('input[type="range"]');
+      const values = document.querySelectorAll('.slider-value');
+      sliders.forEach((slider) => {
+        slider.value = 0;
+      });
+      values.forEach((value) => {
+        value.textContent = '5';
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const sliders = document.querySelectorAll('input[type="range"]');
+      sliders.forEach((slider) => {
+        slider.addEventListener('input', function () {
+          updateSliderValue(this.id, this.id + '-value');
+        });
+      });
+    });
+  </script>
+</th:block>
+<th:block layout:fragment="css">
+  <style>
+    .fieldError {
+      color: #bd2130;
+    }
+
+    .slider-container {
+      margin-bottom: 20px;
+    }
+
+    .slider-label {
+      display: inline-block;
+      width: 80px;
+    }
+
+    .slider-value {
+      display: inline-block;
+      width: 40px;
+    }
+  </style>
+</th:block>
+
+<div layout:fragment="content" style="text-align: center">
+  <h2>커피 추천</h2>
+  <h4>커피의 속성을 조정해주세요</h4>
+
+  <form action="/coffee/Buy_result" role="form" method="post"  th:object="${coffeeAttributes}">
+    <div class="slider-container">
+      <label for="aroma">향(Aroma)</label>
+      <input type="range" id="aroma" name="aroma" th:min="${minAttributeValue}" th:max="${maxAttributeValue}"   step="0.01" class="form-control-range"
+             onchange="updateSliderValue('aroma', 'aroma-value')">
+      <span class="slider-value" id="aroma-value">5</span>
+    </div>
+    <div class="slider-container">
+      <label for="flavor">맛(Flavor)</label>
+      <input type="range" id="flavor" name="flavor" th:min="${minAttributeValue}" th:max="${maxAttributeValue}" step="0.01" class="form-control-range"
+             onchange="updateSliderValue('flavor', 'flavor-value')">
+      <span class="slider-value" id="flavor-value">5</span>
+    </div>
+    <div class="slider-container">
+      <label for="body">풍미(Body)</label>
+      <input type="range" id="body" name="body" th:min="${minAttributeValue}" th:max="${maxAttributeValue}" step="0.01"  class="form-control-range"
+             onchange="updateSliderValue('body', 'body-value')">
+      <span class="slider-value" id="body-value">5</span>
+    </div>
+    <div class="slider-container">
+      <label for="sweetness">단맛(Sweetness)</label>
+      <input type="range" id="sweetness" name="sweetness" th:min="${minAttributeValue}" th:max="${maxAttributeValue}" step="0.01" class="form-control-range"
+             onchange="updateSliderValue('sweetness', 'sweetness-value')">
+      <span class="slider-value" id="sweetness-value">5</span>
+    </div>
+    <div class="slider-container">
+      <label for="acidity">산미(Acidity)</label>
+      <input type="range" id="acidity" name="acidity" th:min="${minAttributeValue}" th:max="${maxAttributeValue}" step="0.01" class="form-control-range" onchange="updateSliderValue('acidity', 'acidity-value')">
+      <span class="slider-value" id="acidity-value">5</span>
+    </div>
+    <div class="slider-container">
+      <label for="balance">균형(Balance)</label>
+      <input type="range" id="balance" name="balance" th:min="${minAttributeValue}" th:max="${maxAttributeValue}" step="0.01" class="form-control-range" onchange="updateSliderValue('balance', 'balance-value')">
+      <span class="slider-value" id="balance-value">5</span>
+    </div>
+    <div class="slider-container">
+      <label for="uniformity">균일성(Uniformity)</label>
+      <input type="range" id="uniformity" name="uniformity" th:min="${minAttributeValue}" th:max="${maxAttributeValue}" step="0.01" class="form-control-range" onchange="updateSliderValue('uniformity', 'uniformity-value')">
+      <span class="slider-value" id="uniformity-value">5</span>
+    </div>
+    <div class="slider-container">
+      <label for="aftertaste">뒷맛(Aftertaste)</label>
+      <input type="range" id="aftertaste" name="aftertaste" th:min="${minAttributeValue}" th:max="${maxAttributeValue}" step="0.01" class="form-control-range" onchange="updateSliderValue('aftertaste', 'aftertaste-value')">
+      <span class="slider-value" id="aftertaste-value">5</span>
+    </div>
+    <button type="submit" class="btn btn-primary" >추천 받기</button>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+  </form>
+
+
+
+</div>
+</html>

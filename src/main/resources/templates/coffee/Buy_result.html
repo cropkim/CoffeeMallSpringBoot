@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+<head>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+
+<body>
+<div layout:fragment="content" style="text-align: center">
+    <h2>추천 결과</h2>
+    <div th:if="${recommendedCoffee != null}">
+        <p>원산지: <span th:text="${recommendedCoffee.Origin}"></span></p>
+        <p>지역: <span th:text="${recommendedCoffee.region}"></span></p>
+        <p>품종: <span th:text="${recommendedCoffee.variety}"></span></p>
+        <p>색상: <span th:text="${recommendedCoffee.color}"></span></p>
+        <p>가공 방법: <span th:text="${recommendedCoffee.processingMethod}"></span></p>
+        <p>수분 함량: <span th:text="${recommendedCoffee.moisture}"></span></p>
+    </div>
+    <p><a href="../coffee/Buy_recommendation">다시 추천 받기</a></p>
+</div>
+</body>
+</html>

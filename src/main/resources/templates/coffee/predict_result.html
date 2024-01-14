@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+<head>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+
+<body>
+<div layout:fragment="content" style="text-align: center">
+    <h2>추천 결과</h2>
+    <div th:if="${predictedCoffee != null}">
+        <p>향: <span th:text="${predictedCoffee.aroma}"></span></p>
+        <p>맛: <span th:text="${predictedCoffee.flavor}"></span></p>
+        <p>풍미: <span th:text="${predictedCoffee.body}"></span></p>
+        <p>단맛: <span th:text="${predictedCoffee.sweetness}"></span></p>
+        <p>산미: <span th:text="${predictedCoffee.acidity}"></span></p>
+        <p>균형: <span th:text="${predictedCoffee.balance}"></span></p>
+        <p>균일성: <span th:text="${predictedCoffee.uniformity}"></span></p>
+        <p>뒷맛: <span th:text="${predictedCoffee.aftertaste}"></span></p>
+    </div>
+    <p><a href="../coffee/predict">다시 예측 받기</a></p>
+</div>
+</body>
+</html>

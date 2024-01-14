@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+<head>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            var errorMessage = /*[[${errorMessage}]]*/ null;
+            if (errorMessage != null) {
+                alert(errorMessage);
+            }
+        });
+    </script>
+</th:block>
+<th:block layout:fragment="css">
+    <style></style>
+</th:block>
+<div layout:fragment="content" style="text-align: center">
+    <h2>원두 예측</h2>
+    <h4>원두의 객관적 정보를 선택해주세요.</h4>
+
+<form action="/coffee/predict_result"role="form" method="post"  th:object="${coffeeAttributes}">
+    <label for="origin">Country of Origin:</label>
+    <select id="origin" name="origin" th:value="${coffeeAttributes.Origin}" required>
+        <option value="Brazil">Brazil</option>
+        <option value="China">China</option>
+        <option value="Colombia">Colombia</option>
+        <option value="Costa Rica">Costa Rica</option>
+        <option value="El Salvador">El Salvador</option>
+        <option value="Ethiopia">Ethiopia</option>
+        <option value="Guatemala">Guatemala</option>
+        <option value="Haiti">Haiti</option>
+        <option value="Honduras">Honduras</option>
+        <option value="Indonesia">Indonesia</option>
+        <option value="Japan">Japan</option>
+        <option value="Kenya">Kenya</option>
+        <option value="Laos">Laos</option>
+        <option value="Malawi">Malawi</option>
+        <option value="Mexico">Mexico</option>
+        <option value="Myanmar">Myanmar</option>
+        <option value="Nicaragua">Nicaragua</option>
+        <option value="Panama">Panama</option>
+        <option value="Peru">Peru</option>
+        <option value="Philippines">Philippines</option>
+        <option value="Rwanda">Rwanda</option>
+        <option value="Tanzania, United Republic Of">Tanzania, United Republic Of</option>
+        <option value="Thailand">Thailand</option>
+        <option value="Uganda">Uganda</option>
+        <option value="United States">United States</option>
+        <option value="United States (Hawaii)">United States (Hawaii)</option>
+        <option value="United States (Puerto Rico)">United States (Puerto Rico)</option>
+        <option value="Vietnam">Vietnam</option>
+    </select>
+    <br>
+    <label for="region">Region:</label>
+    <select id="region" name="region" th:value="${coffeeAttributes.region}" >
+        <option value="acatenango">acatenango</option>
+        <option value="aceh">aceh</option>
+        <option value="aceh tengah">aceh tengah</option>
+        <option value="ada okinawa japan">ada okinawa japan</option>
+        <option value="addis ababa">addis ababa</option>
+        <option value="adolfo lopez mateos">adolfo lopez mateos</option>
+        <option value="aldea xeucalvitz, ixil region, quiche department">aldea xeucalvitz, ixil region, quiche department</option>
+        <option value="alta paulista (sao paulo)">alta paulista (sao paulo)</option>
+        <option value="altotonga">altotonga</option>
+        <option value="amatenango de la frontera">amatenango de la frontera</option>
+        <option value="antigua">antigua</option>
+        <option value="antioquia">antioquia</option>
+        <option value="apaneca">apaneca</option>
+        <option value="arusha">arusha</option>
+        <option value="arusha meru">arusha meru</option>
+        <option value="asia pacific">asia pacific</option>
+        <option value="ataco, apaneca - ilamatepec mountain range">ataco, apaneca - ilamatepec mountain range</option>
+        <option value="atitlan">atitlan</option>
+        <option value="atoyac de alvarez">atoyac de alvarez</option>
+        <option value="bali">bali</option>
+        <option value="bener meriah">bener meriah</option>
+        <option value="blend">blend</option>
+        <option value="blida,kercha,guji,oromia">blida,kercha,guji,oromia</option>
+        <option value="boquete">boquete</option>
+        <option value="brazil matas de minas">brazil matas de minas</option>
+        <option value="brunca">brunca</option>
+        <option value="bukidnon, mindanao, philppines">bukidnon, mindanao, philppines</option>
+        <option value="bulambuli eastern region">bulambuli eastern region</option>
+        <option value="cacahuatique">cacahuatique</option>
+        <option value="calnali, hidalgo">calnali, hidalgo</option>
+        <option value="canoas">canoas</option>
+        <option value="carmo de minas">carmo de minas</option>
+        <option value="cauca">cauca</option>
+        <option value="central kenya">central kenya</option>
+        <option value="central region">central region</option>
+        <option value="central valley">central valley</option>
+        <option value="cerrado">cerrado</option>
+        <option value="cerrado - monte carmelo - minas gerais">cerrado - monte carmelo - minas gerais</option>
+        <option value="chapadão de ferro (cerrado mineiro)">chapadão de ferro (cerrado mineiro)</option>
+        <option value="chapulhuacan, hidalgo">chapulhuacan, hidalgo</option>
+        <option value="chiang rai">chiang rai</option>
+        <option value="chiang rai thailand">chiang rai thailand</option>
+        <option value="chiangrai">chiangrai</option>
+        <option value="chiapas">chiapas</option>
+        <option value="chiapas, jaltenango">chiapas, jaltenango</option>
+        <option value="chilón">chilón</option>
+        <option value="chocaman, veracruz">chocaman, veracruz</option>
+        <option value="coatepec">coatepec</option>
+        <option value="coatepec, coatepec">coatepec, coatepec</option>
+        <option value="colima">colima</option>
+        <option value="comayagua">comayagua</option>
+        <option value="comayagua, honduras">comayagua, honduras</option>
+        <option value="cordoba">cordoba</option>
+        <option value="corillera administrative">corillera administrative</option>
+        <option value="coscomatepec">coscomatepec</option>
+        <option value="costa rica">costa rica</option>
+        <option value="cuarenteño">cuarenteño</option>
+        <option value="cundinamarca">cundinamarca</option>
+        <option value="dala">dala</option>
+        <option value="davao city, region 11">davao city, region 11</option>
+        <option value="dehong prefecture">dehong prefecture</option>
+        <option value="department d'artibonite , haiti">department d'artibonite , haiti</option>
+        <option value="department of ahuachapan, municipality of apanecallamatepec mountain">department of ahuachapan, municipality of apanecallamatepec mountain</option>
+        <option value="doe kwin, pyin oo lwin">doe kwin, pyin oo lwin</option>
+        <option value="don duong">don duong</option>
+        <option value="dondon, haiti">dondon, haiti</option>
+        <option value="east java">east java</option>
+        <option value="eastern">eastern</option>
+        <option value="eastern uganda">eastern uganda</option>
+        <option value="eje cafetero">eje cafetero</option>
+        <option value="el balsamo, quezaltepec">el balsamo, quezaltepec</option>
+        <option value="el desmoronado, talpan de allende jalisco">el desmoronado, talpan de allende jalisco</option>
+        <option value="el paraíso">el paraíso</option>
+        <option value="el progreso">el progreso</option>
+        <option value="el tumbador, san marcos">el tumbador, san marcos</option>
+        <option value="escuitla">escuitla</option>
+        <option value="fln mirador">fln mirador</option>
+        <option value="fortín de las flores">fortín de las flores</option>
+        <option value="gicumbi">gicumbi</option>
+        <option value="grama valley">grama valley</option>
+        <option value="guatemala">guatemala</option>
+        <option value="guayata">guayata</option>
+        <option value="guinope el paraíso">guinope el paraíso</option>
+        <option value="guji-hambela">guji-hambela</option>
+        <option value="haiti">haiti</option>
+        <option value="high mogiana">high mogiana</option>
+        <option value="huautla de jimenez">huautla de jimenez</option>
+        <option value="huazalingo, hidalgo">huazalingo, hidalgo</option>
+        <option value="huehuetenango">huehuetenango</option>
+        <option value="huila">huila</option>
+        <option value="huila supremo">huila supremo</option>
+        <option value="hustusco">hustusco</option>
+        <option value="ijen">ijen</option>
+        <option value="iliatenco, guerrero">iliatenco, guerrero</option>
+        <option value="ilomba vilage, mbozi">ilomba vilage, mbozi</option>
+        <option value="indonesia">indonesia</option>
+        <option value="intibuca">intibuca</option>
+        <option value="iwala village, mbeya rural">iwala village, mbeya rural</option>
+        <option value="ixhuatlan del cafe">ixhuatlan del cafe</option>
+        <option value="jalapa">jalapa</option>
+        <option value="jaltenango">jaltenango</option>
+        <option value="jaltocan, hidalgo">jaltocan, hidalgo</option>
+        <option value="jinotega">jinotega</option>
+        <option value="juchique de ferrer">juchique de ferrer</option>
+        <option value="juquila">juquila</option>
+        <option value="kakoma">kakoma</option>
+        <option value="kapchorwa">kapchorwa</option>
+        <option value="kapchorwa eastern">kapchorwa eastern</option>
+        <option value="karatu arusha">karatu arusha</option>
+        <option value="karatu ngorogoro">karatu ngorogoro</option>
+        <option value="karatu northern">karatu northern</option>
+        <option value="kasese">kasese</option>
+        <option value="kasese, mt. rwenzori">kasese, mt. rwenzori</option>
+        <option value="kefa zone, gimbo distict, at a place called woka araba, south west ethiopia.">kefa zone, gimbo distict, at a place called woka araba, south west ethiopia.</option>
+        <option value="kenya">kenya</option>
+        <option value="kiambu">kiambu</option>
+        <option value="kilimanjaro">kilimanjaro</option>
+        <option value="kirinyaga">kirinyaga</option>
+        <option value="kona">kona</option>
+        <option value="la concordia">la concordia</option>
+        <option value="la concordia, chiapas">la concordia, chiapas</option>
+        <option value="la cumbre">la cumbre</option>
+        <option value="la plata">la plata</option>
+        <option value="la reforma, san marcos">la reforma, san marcos</option>
+        <option value="la yerba">la yerba</option>
+        <option value="la yerbabuena">la yerbabuena</option>
+        <option value="lao p.d.r.">lao p.d.r.</option>
+        <option value="lington nihuta">lington nihuta</option>
+        <option value="lintong">lintong</option>
+        <option value="los angeles">los angeles</option>
+        <option value="mantiqueira de minas">mantiqueira de minas</option>
+        <option value="manyara, karatu">manyara, karatu</option>
+        <option value="manzanillo">manzanillo</option>
+        <option value="marcala">marcala</option>
+        <option value="matagalpa">matagalpa</option>
+        <option value="matas de minas">matas de minas</option>
+        <option value="mbale">mbale</option>
+        <option value="mbeya">mbeya</option>
+        <option value="mbinga">mbinga</option>
+        <option value="menglian">menglian</option>
+        <option value="meru">meru</option>
+        <option value="meru county">meru county</option>
+        <option value="minas gerais, br">minas gerais, br</option>
+        <option value="mkuu rombo">mkuu rombo</option>
+        <option value="mogiana">mogiana</option>
+        <option value="monte carmelo">monte carmelo</option>
+        <option value="moshi">moshi</option>
+        <option value="motozintla">motozintla</option>
+        <option value="motozintla, chiapas">motozintla, chiapas</option>
+        <option value="mountains of minas gerais">mountains of minas gerais</option>
+        <option value="mt elgon">mt elgon</option>
+        <option value="mt. rwenzori">mt. rwenzori</option>
+        <option value="muranga">muranga</option>
+        <option value="mzuzu">mzuzu</option>
+        <option value="naranjo">naranjo</option>
+        <option value="nariño">nariño</option>
+        <option value="ngorogoro">ngorogoro</option>
+        <option value="nkure- meru">nkure- meru</option>
+        <option value="norte">norte</option>
+        <option value="northern">northern</option>
+        <option value="nuevo oriente">nuevo oriente</option>
+        <option value="nyeri">nyeri</option>
+        <option value="oaxaca">oaxaca</option>
+        <option value="occidental">occidental</option>
+        <option value="occidente">occidente</option>
+        <option value="ocosingo">ocosingo</option>
+        <option value="ocotepeque">ocotepeque</option>
+        <option value="oldeani , mongola">oldeani , mongola</option>
+        <option value="orient">orient</option>
+        <option value="oriente">oriente</option>
+        <option value="oromia">oromia</option>
+        <option value="paksong,laos">paksong,laos</option>
+        <option value="pereira">pereira</option>
+        <option value="petatlan">petatlan</option>
+        <option value="phahi">phahi</option>
+        <option value="pitalito">pitalito</option>
+        <option value="pochutla">pochutla</option>
+        <option value="pyin oo lwin">pyin oo lwin</option>
+        <option value="quetzaltenango">quetzaltenango</option>
+        <option value="ruvuma">ruvuma</option>
+        <option value="ruvuma, mbinga">ruvuma, mbinga</option>
+        <option value="sacatepequez, guatemala">sacatepequez, guatemala</option>
+        <option value="sacún palma, municipio de chilón, chiapas">sacún palma, municipio de chilón, chiapas</option>
+        <option value="san bartolo tutotepec">san bartolo tutotepec</option>
+        <option value="san fernando">san fernando</option>
+        <option value="san ignacio">san ignacio</option>
+        <option value="san isidro">san isidro</option>
+        <option value="san lucas toliman, solola">san lucas toliman, solola</option>
+        <option value="san marcos">san marcos</option>
+        <option value="san miguel del puerto">san miguel del puerto</option>
+        <option value="san pedro cotzilnam">san pedro cotzilnam</option>
+        <option value="san rafael">san rafael</option>
+        <option value="san ramon">san ramon</option>
+        <option value="santa catarina juquila">santa catarina juquila</option>
+        <option value="santa maria sitepec">santa maria sitepec</option>
+        <option value="santa rosa">santa rosa</option>
+        <option value="santander">santander</option>
+        <option value="santo domingo cacalotepec">santo domingo cacalotepec</option>
+        <option value="santo reyes nopala">santo reyes nopala</option>
+        <option value="sapan toraja">sapan toraja</option>
+        <option value="shizingo village">shizingo village</option>
+        <option value="sidamo">sidamo</option>
+        <option value="sierra fraylesca, chiapas">sierra fraylesca, chiapas</option>
+        <option value="sierra madre occidental">sierra madre occidental</option>
+        <option value="sierra norte yajalon, chiapas">sierra norte yajalon, chiapas</option>
+        <option value="sierra, chiapas">sierra, chiapas</option>
+        <option value="siguatepeque, comayagua">siguatepeque, comayagua</option>
+        <option value="siltepec el triunfo">siltepec el triunfo</option>
+        <option value="siltepec el triunfo, chiapas, mexico">siltepec el triunfo, chiapas, mexico</option>
+        <option value="sipi, mt elgon">sipi, mt elgon</option>
+        <option value="snnp/kaffa zone,gimbowereda">snnp/kaffa zone,gimbowereda</option>
+        <option value="snnprg; kafa; telo woreda; shada kebele">snnprg; kafa; telo woreda; shada kebele</option>
+        <option value="solola">solola</option>
+        <option value="south huila">south huila</option>
+        <option value="south of minas">south of minas</option>
+        <option value="southern- zomba">southern- zomba</option>
+        <option value="sul de minas">sul de minas</option>
+        <option value="sumatra brastagi">sumatra brastagi</option>
+        <option value="talpa de allende">talpa de allende</option>
+        <option value="tapachula">tapachula</option>
+        <option value="tarrazu">tarrazu</option>
+        <option value="temanggung, indonesia">temanggung, indonesia</option>
+        <option value="temaxcalapa">temaxcalapa</option>
+        <option value="tenango de doria, hidalgo">tenango de doria, hidalgo</option>
+        <option value="tepetzingo">tepetzingo</option>
+        <option value="tepictla">tepictla</option>
+        <option value="thailand">thailand</option>
+        <option value="thiotte, haiti">thiotte, haiti</option>
+        <option value="tlacuilotepec">tlacuilotepec</option>
+        <option value="tlanchinol, hidalgo">tlanchinol, hidalgo</option>
+        <option value="tlatlauquitepec">tlatlauquitepec</option>
+        <option value="tolima">tolima</option>
+        <option value="totutla">totutla</option>
+        <option value="tres rios">tres rios</option>
+        <option value="turrialba">turrialba</option>
+        <option value="tuxtla gutierrez">tuxtla gutierrez</option>
+        <option value="vale da grama">vale da grama</option>
+        <option value="valle central">valle central</option>
+        <option value="veracruz">veracruz</option>
+        <option value="vietnam">vietnam</option>
+        <option value="vietnam cau dat">vietnam cau dat</option>
+        <option value="vietnam tutra">vietnam tutra</option>
+        <option value="villa talea de castro">villa talea de castro</option>
+        <option value="west and central valley">west and central valley</option>
+        <option value="west nile">west nile</option>
+        <option value="west valley">west valley</option>
+        <option value="western region">western region</option>
+        <option value="xalapa">xalapa</option>
+        <option value="xicotepec de juarez">xicotepec de juarez</option>
+        <option value="xishuangbanna prefecture">xishuangbanna prefecture</option>
+        <option value="xochitonalco, huautla">xochitonalco, huautla</option>
+        <option value="yajalon">yajalon</option>
+        <option value="yauco region">yauco region</option>
+        <option value="yauk sauk, shan state">yauk sauk, shan state</option>
+        <option value="yecuatla">yecuatla</option>
+        <option value="yunnan">yunnan</option>
+        <option value="ywar ngan">ywar ngan</option>
+        <option value="ywar ngan township">ywar ngan township</option>
+        <option value="zapotitlan de mendez">zapotitlan de mendez</option>
+        <option value="zaragoza itundujia">zaragoza itundujia</option>
+        <option value="zentla">zentla</option>
+        <option value="zihuatanejo de azueta">zihuatanejo de azueta</option>
+
+    </select>
+    <br>
+    <label for="variety">Variety:</label>
+    <select id="variety" name="variety" th:value="${coffeeAttributes.variety}" required>
+        <option value="Caturra">Caturra</option>
+        <option value="Ethiopian Heirlooms">Ethiopian Heirlooms</option>
+        <option value="Gesha">Gesha</option>
+        <option value="Hawaiian Kona">Hawaiian Kona</option>
+        <option value="Java">Java</option>
+        <option value="Mandheling">Mandheling</option>
+        <option value="Moka Peaberry">Moka Peaberry</option>
+        <option value="Mundo Novo">Mundo Novo</option>
+        <option value="Other">Other</option>
+        <option value="Pacamara">Pacamara</option>
+        <option value="Pacas">Pacas</option>
+        <option value="Peaberry">Peaberry</option>
+        <option value="Ruiru 11">Ruiru 11</option>
+        <option value="SL14">SL14</option>
+        <option value="SL28">SL28</option>
+        <option value="SL34">SL34</option>
+        <option value="Sulawesi">Sulawesi</option>
+        <option value="Sumatra">Sumatra</option>
+        <option value="Sumatra Lintong">Sumatra Lintong</option>
+        <option value="Typica">Typica</option>
+        <option value="Yellow Bourbon">Yellow Bourbon</option>
+    </select>
+    <br>
+    <label for="color">Color:</label>
+    <select id="color" name="color" th:value="${coffeeAttributes.color}" required>
+        <option value="Blue-Green">Blue-Green</option>
+        <option value="Bluish-Green">Bluish-Green</option>
+        <option value="Green">Green</option>
+        <option value="None">None</option>
+    </select>
+    <br>
+    <label for="catOneDefects">Category One Defects:</label>
+    <select id="catOneDefects" name="catOneDefects" th:value="${coffeeAttributes.Category_one_defects}" required>
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
+    <br>
+    <label for="catTwoDefects">Category Two Defects:</label>
+    _<select id="catTwoDefects" name="catTwoDefects" th:value="${coffeeAttributes.Category_two_defects}" required>
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
+    <br>
+    <label for="processingMethod">Processing Method:</label>
+    <select id="processingMethod" name="processingMethod" th:value="${coffeeAttributes.ProcessingMethod}" required>
+        <option value="Natural / Dry">Natural / Dry</option>
+        <option value="Other">Other</option>
+        <option value="Pulped natural / honey">Pulped natural / honey</option>
+        <option value="Semi-washed / Semi-pulped">Semi-washed / Semi-pulped</option>
+        <option value="Washed / Wet">Washed / Wet</option>
+    </select>
+    <br>
+    <label for="moisture">Moisture:</label>
+    <input type="text" id="moisture" name="moisture" th:value="${coffeeAttributes.moisture}" required>
+    <br>
+
+    <button type="submit" class="btn btn-primary" >맛 예측하기</button>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+</form>
+
+</div>
+</html>
